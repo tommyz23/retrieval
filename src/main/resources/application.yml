@@ -1,0 +1,37 @@
+server:
+  port: 8010
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    name: dianping
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/dianping?useUnicode=true&characterEncoding=UTF-8
+    username: root
+
+  #add-mappings=true表示如果所有的controller都没有命中，则使用默认的静态资源处理器做匹配
+#  mvc:
+#    static-path-pattern: /static/**
+#    throw-exception-if-no-handler-found: true
+#  resources:
+#    add-mappings: true
+
+  thymeleaf:
+    cache: false
+    check-template: true
+    check-template-location: true
+    enabled: true
+    encoding: UTF-8
+    mode: HTML5
+    prefix: classpath:/templates/
+
+
+
+elasticsearch:
+  ip: 127.0.0.1:9200
+
+

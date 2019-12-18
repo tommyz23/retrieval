@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>主页</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" type="text/css" charset="utf-8"/>
+    <link rel="stylesheet" href="/css/login.css" type="text/css" charset="utf-8"/>
+    <!--[if lt IE 9]>
+    <script src="/layui/html5.min.js"></script>
+    <script src="/layui/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        .info-title {
+            text-align: center;
+            color: #b7bbc6;
+            font-size: 32px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+
+        }
+        .search {
+            text-align: center;
+            line-height: 70px;
+            margin:120px 60px 40px 60px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="layui-row" style="background-color: #2F4056;">
+    <div class="layui-container">
+        <ul class="layui-nav layui-bg-cyan">
+            <li class="layui-nav-item">首页</li>
+            <li class="layui-nav-item layui-this" style="margin-left:50px;">
+                <a href="/listNo">模块1</a>
+            </li>
+            <li class="layui-nav-item" style="margin-left:50px;">
+                <a href="/listNo">模块2</a>
+            </li>
+            <li class="layui-nav-item" style="float:right;">
+                <a href="javascript:;" th:text="test"></a>
+                <dl class="layui-nav-child">
+                    <dd><a href="/logout">退出</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+    <div class="layui-container">
+        <form id="searchForm" method="post" action="/search">
+            <div class="layui-row">
+                <div class="search">
+                    <button type="button" class="layui-btn layui-btn" id="advancedsearch-btn">
+                        高级搜索
+                    </button>
+                    <div class="layui-inline" style="width: 70%">
+                        <input type="text" name="keyword" class="layui-input" id="ah-input" th:value="${keyword}"/>
+                    </div>
+                    <button type="button" class="layui-btn layui-btn-primary" id="search-btn">
+                        搜索
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="layui-container">
+    <div class="layui-row layui-col-space20">
+        <div class="info-title">
+            电子卷宗信息
+        </div>
+        <div class="layui-col-md6 layui-bg-gray">
+            <div class="layui-col-md4">
+                <label class="layui-form-label">总数</label>
+            </div>
+            <div class="layui-col-md8">
+                <label class="layui-form-label" th:text="${num}+'件'"></label>
+            </div>
+        </div>
+        <div class="layui-col-md6 layui-bg-gray">
+            <div class="layui-col-md4">
+                <label class="layui-form-label">已处理</label>
+            </div>
+            <div class="layui-col-md8">
+                <label class="layui-form-label">23456件</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/jquery-1.8.3.min.js"></script>
+<script src="/layui/layui.all.js"></script>
+<script>
+
+    $(function () {
+        $('#search-btn').click(function () {
+            $('#searchForm').submit();
+        })
+    })
+
+</script>
+</body>
+</html>
