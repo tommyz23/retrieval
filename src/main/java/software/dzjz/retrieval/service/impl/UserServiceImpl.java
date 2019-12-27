@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import software.dzjz.retrieval.common.BusinessException;
 import software.dzjz.retrieval.common.EmBusinessError;
-import software.dzjz.retrieval.dal.UserModelMapper;
+import software.dzjz.retrieval.mapper.UserModelMapper;
 import software.dzjz.retrieval.model.UserModel;
 import software.dzjz.retrieval.service.UserService;
 

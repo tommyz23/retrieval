@@ -5,25 +5,19 @@ import com.alibaba.fastjson.JSON;
 import org.apache.lucene.search.TotalHits;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.client.Request;
 import org.elasticsearch.client.RequestOptions;
 
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.text.Text;
 import org.elasticsearch.common.unit.TimeValue;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.QueryStringQueryBuilder;
 import org.elasticsearch.search.SearchHit;
-import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
-import software.dzjz.retrieval.dal.DzjzwjModelMapper;
+import software.dzjz.retrieval.mapper.DzjzwjModelMapper;
 import software.dzjz.retrieval.model.DzjzModel;
 import software.dzjz.retrieval.model.DzjzwjModel;
 import software.dzjz.retrieval.service.DzjzService;
@@ -38,30 +32,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class DzjzServiceImpl implements DzjzService {
-//    @Override
-//    public DzjzModel get(String id) {
-//        return null;
-//    }
-//
-//    @Override
-//    public List<DzjzModel> searchEs(String keyword) throws IOException {
-//        return null;
-//    }
-//
-//    @Override
-//    public long countAll() throws IOException {
-//        return 0;
-//    }
-//
-//    @Override
-//    public long countByCjr(String cjr) {
-//        return 0;
-//    }
-//
-//    @Override
-//    public DzjzModel searchEsById(String id) {
-//        return null;
-//    }
 
     @Autowired
     private RestHighLevelClient highLevelClient;
@@ -167,8 +137,12 @@ public class DzjzServiceImpl implements DzjzService {
     }
 
     @Override
-    public long countByCjr(String cjr) {
-        List<DzjzwjModel> dzjzwjModels = dzjzwjModelMapper.selectByCjr(cjr);
+    public Integer countBySpry(String spry) {
+
+        //根据当前登录用户的审判人员编号获取案件序号集合
+
+        //根据案件序号集合查询电子卷宗数量
+        List<DzjzwjModel> dzjzwjModels = dzjzwjModelMapper.selectByCjr(spry);
         return dzjzwjModels.size();
     }
 

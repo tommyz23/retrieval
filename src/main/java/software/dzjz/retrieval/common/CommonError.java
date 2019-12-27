@@ -1,6 +1,9 @@
 package software.dzjz.retrieval.common;
-
+/**
+ * 定义通用对返回对象 返回错误信息
+ */
 public class CommonError {
+
     //错误码
     private Integer errCode;
 

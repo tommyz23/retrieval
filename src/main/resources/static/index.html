@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-12">
+            <h2>
+                电子卷宗智能检索系统
+            </h2>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 20px;" id="search">
+        <div class="col-12">
+            <form class="form-inline">
+                <div class="form-group mb-2">
+                    <input type="text" class="form-control" id="title-mysql" placeholder="输入关键词" v-model="keyword">
+                </div>
+                <button type="button" class="btn btn-primary mb-2" style="margin-left: 5px;" v-on:click="search">检索</button>
+                <button type="button" class="btn btn-primary mb-2" style="margin-left: 5px;" v-on:click="adv_search">高级检索</button>
+            </form>
+
+            <div>
+                <span>共收集电子卷宗: {{total_num}}件  您已处理: {{deal_num}}件</span>
+            </div>
+            <div>
+                <span>共检索到电子卷宗: {{num}}件</span>
+            </div>
+
+            <div class="row" style="margin-top: 20px;">
+                <div class="col-9" v-for="(item, index) in dzjzList">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title"><a href="">{{item.ah}}</a></h4>
+                            <p>{{item.ocrText}}</p>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="col-3">-->
+                    <!--<div class="">-->
+                        <!--<div>案件性质</div>-->
+                        <!--<ul class="nav flex-column">-->
+                            <!--<li class="nav-item">-->
+                                <!--<a class="nav-link active" href="#">刑事</a>-->
+                            <!--</li>-->
+                            <!--<li class="nav-item">-->
+                                <!--<a class="nav-link" href="#">民事</a>-->
+                            <!--</li>-->
+                            <!--<li class="nav-item">-->
+                                <!--<a class="nav-link" href="#">赔偿</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                    <!--<div class="">-->
+                        <!--<div>文件类型</div>-->
+                        <!--<ul class="nav flex-column">-->
+                            <!--<li class="nav-item">-->
+                                <!--<a class="nav-link active" href="#">pdf</a>-->
+                            <!--</li>-->
+                            <!--<li class="nav-item">-->
+                                <!--<a class="nav-link" href="#">word</a>-->
+                            <!--</li>-->
+                            <!--<li class="nav-item">-->
+                                <!--<a class="nav-link" href="#">图片</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                    <!--<div class="">-->
+                        <!--<div>立案年份</div>-->
+                        <!--<ul class="nav flex-column">-->
+                            <!--<li class="nav-item">-->
+                                <!--<a class="nav-link active" href="#">2019</a>-->
+                            <!--</li>-->
+                            <!--<li class="nav-item">-->
+                                <!--<a class="nav-link" href="#">2018</a>-->
+                            <!--</li>-->
+                            <!--<li class="nav-item">-->
+                                <!--<a class="nav-link" href="#">2017</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="./js/vue.js"></script>
+<script src="./js/axios.min.js"></script>
+<script>
+
+    var app ;
+    app = new Vue({
+        el:'#search',
+        data:{
+            dzjzList:[],
+            total_num:'',
+            deal_num:'',
+            keyword:'',
+            num:''
+        },
+        methods:{
+            getBaseInfo:function () {
+                console.log("getBaseInfo");
+                var that = this;
+                axios.get("http://localhost:8010/getbaseinfo",{}).then(function (response) {
+                    that.total_num = response.data.data.totalnum;
+                    that.deal_num = response.data.data.dealnum;
+                })
+            },
+            search:function () {
+                console.log("search");
+                var that = this;
+                var param = {"keyword": that.keyword};
+                axios.post("http://localhost:8010/search",param).then(function (response) {
+                    that.dzjzList = response.data.data;
+                    that.num = dzjzList.size();
+
+                })
+            },
+            adv_search:function () {
+                console.log("adv_search");
+            }
+        },
+        created:function () {
+            this.getBaseInfo();
+        }
+    })
+
+
+</script>
+</body>
+</html>

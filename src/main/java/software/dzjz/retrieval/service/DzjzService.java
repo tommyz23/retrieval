@@ -14,7 +14,7 @@ public interface DzjzService {
 
     long countAll() throws IOException;
 
-    long countByCjr(String cjr);
+    Integer countBySpry(String spry);
 
     DzjzModel searchEsById(String id);
 }

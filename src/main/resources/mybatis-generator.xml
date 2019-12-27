@@ -6,7 +6,7 @@
 
     <context id="DB2Tables"    targetRuntime="MyBatis3">
         <!--数据库链接地址账号密码-->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/dianping" userId="root" password="123456">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/znjs" userId="root" password="123456">
         </jdbcConnection>
         <!--生成DataObject类存放位置-->
         <javaModelGenerator targetPackage="software.dzjz.retrieval.model" targetProject="src/main/java">
@@ -23,7 +23,7 @@
                 type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
                 type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
         -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="software.dzjz.retrieval.dal" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="software.dzjz.retrieval.mapper" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
@@ -42,17 +42,28 @@
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
         <!--</table>-->
 
-        <table tableName="DZJZ_WD_WJ"  domainObjectName="DzjzwjModel" enableCountByExample="false"
+        <!--<table tableName="DZJZ_WD_WJ"  domainObjectName="DzjzwjModel" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" selectByExampleQueryId="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+
+        <!--<table tableName="DZJZ_WD_ML"  domainObjectName="DzjzmlModel" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" selectByExampleQueryId="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+        <table tableName="PUB_XTGL_YHB"  domainObjectName="XtglYhbModel" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="id" sqlStatement="MySql" identity="true" />
         </table>
 
-        <table tableName="DZJZ_WD_ML"  domainObjectName="DzjzmlModel" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false">
-            <generatedKey column="id" sqlStatement="MySql" identity="true" />
-        </table>
+        <!--<table tableName="PUB_SPRY"  domainObjectName="SpryModel" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" selectByExampleQueryId="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
 
     </context>
 </generatorConfiguration>

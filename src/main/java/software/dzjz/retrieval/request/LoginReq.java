@@ -4,24 +4,24 @@ import javax.validation.constraints.NotBlank;
 
 public class LoginReq {
 
-    @NotBlank(message = "手机号不能为空")
-    private String telphone;
+    @NotBlank(message = "用户名不能为空")
+    private String yhdm;
     @NotBlank(message = "密码不能为空")
-    private String password;
+    private String yhkl;
 
-    public String getTelphone() {
-        return telphone;
+    public String getYhdm() {
+        return yhdm;
     }
 
-    public void setTelphone(String telphone) {
-        this.telphone = telphone;
+    public void setYhdm(String yhdm) {
+        this.yhdm = yhdm;
     }
 
-    public String getPassword() {
-        return password;
+    public String getYhkl() {
+        return yhkl;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setYhkl(String yhkl) {
+        this.yhkl = yhkl;
     }
 }

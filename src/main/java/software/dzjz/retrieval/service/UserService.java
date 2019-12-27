@@ -7,7 +7,7 @@ public interface UserService {
 
     UserModel getUser(Integer id);
 
-    UserModel login(String telphone,String password) throws BusinessException;
+    UserModel login(String telphone,String password) throws BusinessException, BusinessException;
 
     Integer countAllUser();
 }

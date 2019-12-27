@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-12">
+            <h2>
+                电子卷宗智能检索系统
+            </h2>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 20px;" id="login">
+        <div class="col-12">
+            <form class="form-inline">
+                <div>法院：</div>
+                <select name="fydm">
+                    <option v-for="fy in fyList">{{fy}}</option>
+                </select>
+                <div>账号：</div>
+                <input type="text" placeholder="请输入账号" v-model="username" />
+                <div>密码：</div>
+                <input type="password" placeholder="请输入密码" v-model="password" />
+                <button type="button" class="btn btn-primary" style="margin-left: 5px;" v-on:click="login">登录</button>
+                <button type="button" class="btn btn-primary" style="margin-left: 5px;" v-on:click="">重置</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="./js/vue.js"></script>
+<script src="./js/axios.min.js"></script>
+<script>
+
+    var app ;
+    app = new Vue({
+        el:'#login',
+        data:{
+            fyList:[],
+            username:'',
+            password:''
+        },
+        methods:{
+            getFyInfo:function () {
+                console.log("getFyInfo");
+                var that = this;
+                axios.get("http://localhost:8010/getfyinfo",{}).then(function (response) {
+                    that.fyList = response.data.data;
+                })
+            },
+            login:function () {
+                console.log("login");
+                var that = this;
+                var param = {"yhdm":that.username,"yhkl":that.password};
+                axios.post("http://localhost:8010/login",param).then(function (response) {
+                    if(response.data.status == "success") {
+                        console.log("login success");
+                        window.location.href="/index.html";
+                    }
+                })
+            }
+        },
+        created:function () {
+            this.getFyInfo();
+        }
+    })
+
+
+</script>
+</body>
+</html>

@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 @SpringBootApplication(scanBasePackages = {"software.dzjz.retrieval"})
-@MapperScan("software.dzjz.retrieval.dal")
+@MapperScan("software.dzjz.retrieval.mapper")
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class RetrievalApplication {
 

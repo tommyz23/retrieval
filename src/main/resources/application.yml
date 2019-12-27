@@ -7,13 +7,13 @@ mybatis:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    name: dianping
+    name: znjs
+    username: root
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://127.0.0.1:3306/dianping?useUnicode=true&characterEncoding=UTF-8
-    username: root
+    url: jdbc:mysql://127.0.0.1:3306/znjs?useUnicode=true&characterEncoding=UTF-8&useSSL=false
 
-  #add-mappings=true表示如果所有的controller都没有命中，则使用默认的静态资源处理器做匹配
+#  #add-mappings=true表示如果所有的controller都没有命中，则使用默认的静态资源处理器做匹配
 #  mvc:
 #    static-path-pattern: /static/**
 #    throw-exception-if-no-handler-found: true
@@ -28,7 +28,6 @@ spring:
     encoding: UTF-8
     mode: HTML5
     prefix: classpath:/templates/
-
 
 
 elasticsearch:

@@ -1,9 +1,11 @@
 package software.dzjz.retrieval.common;
 
-
+/**
+ * 定义通用的返回对象 返回正确信息
+ */
 public class CommonRes {
 
-    //表明读经请求的返回处理结果，"success"或"fail"
+    //表明对应请求的返回处理结果，"success"或"fail"
     private String status;
 
     //若status=success时，表明对应的返回的json类数据

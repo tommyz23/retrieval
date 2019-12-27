@@ -1,6 +1,7 @@
 package software.dzjz.retrieval.common;
 
-public class BusinessException extends Exception{
+public class BusinessException extends Exception {
+
     private CommonError commonError;
 
     public BusinessException(EmBusinessError emBusinessError){
