@@ -49,6 +49,13 @@
     from DZJZ_WD_WJ
     where WJID = #{wjid,jdbcType=VARCHAR}
   </select>
+  <select id="selectByAh" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+    select
+    <include refid="Base_Column_List" />
+    from DZJZ_WD_WJ
+    where AH = #{ah,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     <!--
       WARNING - @mbg.generated

@@ -31,34 +31,34 @@ public class EsTestController {
     @Autowired
     private DzjzService dzjzService;
 
-    @RequestMapping("search")
-    @ResponseBody
-    public CommonRes search(@RequestBody @Valid SearchReq searchReq, BindingResult bindingResult) throws BusinessException, IOException {
-        if(bindingResult.hasErrors()){
-            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,  CommonUtil.processErrorString(bindingResult));
-        }
+//    @RequestMapping("search")
+//    @ResponseBody
+//    public CommonRes search(@RequestBody @Valid SearchReq searchReq, BindingResult bindingResult) throws BusinessException, IOException {
+//        if(bindingResult.hasErrors()){
+//            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,  CommonUtil.processErrorString(bindingResult));
+//        }
+//
+//        List<DzjzModel> dzjzModels = dzjzService.searchEs(searchReq.getKeyword());
+//
+//        return CommonRes.create(dzjzModels);
+//    }
 
-        List<DzjzModel> dzjzModels = dzjzService.searchEs(searchReq.getKeyword());
-
-        return CommonRes.create(dzjzModels);
-    }
-
-    @RequestMapping("getbaseinfo")
-    @ResponseBody
-    public CommonRes getBaseInfo() throws IOException {
-
-        UserContextModel userContext = (UserContextModel) ContextHolder
-                .getUserContext();
-        //统计es上的电子卷宗数量
-        long total = dzjzService.countAll();
-
-        //统计审判人员处理过的电子卷宗数量
-        //long num = dzjzService.countBySpry(userContext.getYhdm());
-        Integer deal = 12345;
-
-        BaseInfoVO baseInfoVO = new BaseInfoVO(total, deal);
-        return CommonRes.create(baseInfoVO);
-    }
+//    @RequestMapping("getbaseinfo")
+//    @ResponseBody
+//    public CommonRes getBaseInfo() throws IOException {
+//
+//        UserContextModel userContext = (UserContextModel) ContextHolder
+//                .getUserContext();
+//        //统计es上的电子卷宗数量
+//        long total = dzjzService.countAll();
+//
+//        //统计审判人员处理过的电子卷宗数量
+//        //long num = dzjzService.countBySpry(userContext.getYhdm());
+//        Integer deal = 12345;
+//
+//        BaseInfoVO baseInfoVO = new BaseInfoVO(total, deal);
+//        return CommonRes.create(baseInfoVO);
+//    }
 //
 //    @RequestMapping("/jznr")
 //    public String jznr(HttpServletRequest request, HttpServletResponse response,

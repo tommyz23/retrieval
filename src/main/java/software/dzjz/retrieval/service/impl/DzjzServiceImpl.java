@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import software.dzjz.retrieval.mapper.DzjzwjModelMapper;
 import software.dzjz.retrieval.model.DzjzModel;
 import software.dzjz.retrieval.model.DzjzwjModel;
+import software.dzjz.retrieval.request.AdvSearchReq;
 import software.dzjz.retrieval.service.DzjzService;
 
 import java.io.IOException;
@@ -123,6 +124,15 @@ public class DzjzServiceImpl implements DzjzService {
     }
 
     @Override
+    public List<DzjzModel> advsearch(AdvSearchReq advSearchReq) {
+//        List<DzjzwjModel> dzjzwjModels = dzjzwjModelMapper.selectBy(advSearchReq.getAh(),
+//                advSearchReq.getAjmc(), advSearchReq.getAjxz(), advSearchReq.getWjlx(),
+//                advSearchReq.getLarq(), advSearchReq.getJarq());
+
+        return null;
+    }
+
+    @Override
     public long countAll() throws IOException {
         SearchRequest searchRequest = new SearchRequest("dzjzxx_index");
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
@@ -137,18 +147,19 @@ public class DzjzServiceImpl implements DzjzService {
     }
 
     @Override
-    public Integer countBySpry(String spry) {
-
-        //根据当前登录用户的审判人员编号获取案件序号集合
-
-        //根据案件序号集合查询电子卷宗数量
-        List<DzjzwjModel> dzjzwjModels = dzjzwjModelMapper.selectByCjr(spry);
-        return dzjzwjModels.size();
-    }
-
-    @Override
     public DzjzModel searchEsById(String id) {
         DzjzModel dzjzModel = new DzjzModel();
         return dzjzModel;
+    }
+
+    @Override
+    public List<DzjzModel> searchByAh(String ah) {
+        List<DzjzwjModel> dzjzwjModels = dzjzwjModelMapper.selectByAh(ah);
+
+        List<DzjzModel> dzjzModels = new ArrayList<>();
+        for(DzjzwjModel model: dzjzwjModels) {
+
+        }
+        return dzjzModels;
     }
 }

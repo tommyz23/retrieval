@@ -50,6 +50,7 @@ public class LoginController {
     }
 
     @RequestMapping("/logout")
+    @ResponseBody
     public CommonRes logout(){
         httpServletRequest.getSession().invalidate();
         return CommonRes.create(null);

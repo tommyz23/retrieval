@@ -1,0 +1,48 @@
+.show-page {
+    position: relative;
+}
+.cover {
+    background-color: rgba(20,39,61,.29);
+}
+.show-page-text {
+    color: #fff;
+    font-size: 48px;
+    position: absolute;
+    left: 60px;
+    top: 560px;
+}
+
+.login-tab-title {
+    color: #9a9a9a;
+    font-size: 24px;
+    margin-left: 150px;
+}
+
+.tab.active{
+    color: #108ee9;
+}
+.tab{
+    margin-top:20px;
+    margin-bottom: 20px;
+    display: inline-block;
+    margin-right: 20px;
+    position: relative;
+}
+.login-title{
+    color: #b7bbc6;
+    font-size: 36px;
+    margin-left: 60px;
+    margin-bottom: 30px;
+}
+
+
+.layui-table[lay-size=sm] div{
+    font-size: 12px;
+}
+.layui-table[lay-size=sm] .layui-form-radio{
+     margin: 0px;
+     padding-right: 0px;
+}
+.layui-table[lay-size=sm] .layui-form-item{
+    margin-bottom: 0px;
+}
