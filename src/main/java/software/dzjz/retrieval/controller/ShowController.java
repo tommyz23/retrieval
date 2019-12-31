@@ -9,6 +9,8 @@ import software.dzjz.retrieval.model.DzjzModel;
 import software.dzjz.retrieval.model.DzjzwjModel;
 import software.dzjz.retrieval.service.DzjzService;
 
+import java.util.List;
+
 @Controller
 public class ShowController {
 
@@ -20,8 +22,15 @@ public class ShowController {
     public CommonRes show(String ah) {
 
         //根据案号获取相应的电子卷宗信息
-        //DzjzwjModel dzjzwjModel = dzjzService.searchByAh(ah);
+        List<DzjzModel> dzjzModels = dzjzService.searchByAh(ah);
         //返回给前端
-        return CommonRes.create(null);
+        return CommonRes.create(dzjzModels);
+    }
+
+    @RequestMapping("/detail")
+    @ResponseBody
+    public CommonRes detail(String id) {
+        DzjzModel dzjzModels = dzjzService.searchEsById(id);
+        return CommonRes.create(dzjzModels);
     }
 }

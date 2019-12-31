@@ -17,9 +17,11 @@ import software.dzjz.retrieval.model.UserContextModel;
 import software.dzjz.retrieval.request.AdvSearchReq;
 import software.dzjz.retrieval.request.SearchReq;
 import software.dzjz.retrieval.service.DzjzService;
+import software.dzjz.retrieval.service.SpryService;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -27,6 +29,9 @@ public class SearchController {
 
     @Autowired
     private DzjzService dzjzService;
+
+    @Autowired
+    private SpryService spryService;
 
     @RequestMapping("getbaseinfo")
     @ResponseBody
@@ -50,6 +55,7 @@ public class SearchController {
 
         List<DzjzModel> dzjzModels = dzjzService.searchEs(searchReq.getKeyword());
 
+        //return CommonRes.create(filter(dzjzModels));
         return CommonRes.create(dzjzModels);
     }
 
@@ -58,7 +64,24 @@ public class SearchController {
     public CommonRes advsearch(@RequestBody AdvSearchReq advSearchReq) {
 
         List<DzjzModel> dzjzModels = dzjzService.advsearch(advSearchReq);
+
+        //return CommonRes.create(filter(dzjzModels));
         return CommonRes.create(dzjzModels);
+    }
+
+    private List<DzjzModel> filter(List<DzjzModel> dzjzModels) {
+        UserContextModel userContext = (UserContextModel) ContextHolder
+                .getUserContext();
+
+        List<DzjzModel> list = new ArrayList<>();
+
+        //过滤承办人是当前登录用户的电子卷宗
+        for(DzjzModel model : dzjzModels) {
+            if(userContext.getYhbh() == spryService.getCbrByAjxh(model.getAjxh()).getSprybh()) {
+               list.add(model);
+            }
+        }
+        return list;
     }
 
 

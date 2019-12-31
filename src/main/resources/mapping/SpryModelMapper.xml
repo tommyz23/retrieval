@@ -211,4 +211,12 @@
     where AJXH = #{ajxh,jdbcType=INTEGER}
       and SPRYBH = #{sprybh,jdbcType=INTEGER}
   </update>
+  <select id="getSprysByAjxh" resultMap="BaseResultMap">
+
+    select
+    <include refid="Base_Column_List" />
+    from PUB_SPRY
+    where AJXH = #{ajxh,jdbcType=INTEGER}
+  </select>
+
 </mapper>

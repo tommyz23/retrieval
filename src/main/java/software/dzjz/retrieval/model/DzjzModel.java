@@ -12,7 +12,7 @@ public class DzjzModel {
 
     private String ajmc;
 
-    private long ajxh;
+    private Integer ajxh;
 
     private String ajxz;
 
@@ -80,11 +80,11 @@ public class DzjzModel {
         this.ajmc = ajmc;
     }
 
-    public long getAjxh() {
+    public Integer getAjxh() {
         return ajxh;
     }
 
-    public void setAjxh(long ajxh) {
+    public void setAjxh(Integer ajxh) {
         this.ajxh = ajxh;
     }
 

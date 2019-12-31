@@ -20,4 +20,5 @@ public interface DzjzService {
     DzjzModel searchEsById(String id);
 
     List<DzjzModel> searchByAh(String ah);
+
 }

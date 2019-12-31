@@ -8,6 +8,8 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.client.core.CountRequest;
+import org.elasticsearch.client.core.CountResponse;
 import org.elasticsearch.common.text.Text;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.index.query.QueryStringQueryBuilder;
@@ -15,6 +17,7 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import software.dzjz.retrieval.mapper.DzjzwjModelMapper;
@@ -134,21 +137,25 @@ public class DzjzServiceImpl implements DzjzService {
 
     @Override
     public long countAll() throws IOException {
-        SearchRequest searchRequest = new SearchRequest("dzjzxx_index");
-        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
-        sourceBuilder.query();
-        sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
-        searchRequest.source(sourceBuilder);
+//        SearchRequest searchRequest = new SearchRequest("dzjzxx_index");
+//        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+//        sourceBuilder.query();
+//        sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
+//        searchRequest.source(sourceBuilder);
 
-        SearchResponse response = highLevelClient.search(searchRequest, RequestOptions.DEFAULT);
-        TotalHits totalHits = response.getHits().getTotalHits();
+        CountRequest countRequest = new CountRequest("dzjzxx_index");
 
-        return totalHits.value;
+        //SearchResponse response = highLevelClient.search(searchRequest, RequestOptions.DEFAULT);
+        CountResponse response = highLevelClient.count(countRequest, RequestOptions.DEFAULT);
+
+        return response.getCount();
     }
 
     @Override
     public DzjzModel searchEsById(String id) {
         DzjzModel dzjzModel = new DzjzModel();
+        SearchRequest searchRequest = new SearchRequest("dzjzxx_index");
+
         return dzjzModel;
     }
 
@@ -156,10 +163,22 @@ public class DzjzServiceImpl implements DzjzService {
     public List<DzjzModel> searchByAh(String ah) {
         List<DzjzwjModel> dzjzwjModels = dzjzwjModelMapper.selectByAh(ah);
 
-        List<DzjzModel> dzjzModels = new ArrayList<>();
+        List<DzjzModel> list = new ArrayList<>();
         for(DzjzwjModel model: dzjzwjModels) {
-
+            list.add(convertFromWj(model));
         }
-        return dzjzModels;
+        return list;
+    }
+
+    private DzjzModel convertFromWj(DzjzwjModel dzjzwjModel) {
+        DzjzModel model = new DzjzModel();
+
+        model.setId(dzjzwjModel.getWjid());
+        model.setAh(dzjzwjModel.getAh());
+        model.setAjxh(dzjzwjModel.getAjxh());
+        model.setWjmc(dzjzwjModel.getWjmc());
+        model.setWjlj(dzjzwjModel.getWjlj());
+
+        return model;
     }
 }
